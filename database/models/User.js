@@ -21,16 +21,12 @@ User.init(
         email: {
             type: DataTypes.STRING(15),
             allowNull: false
-        },
-        active: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true
         }
     },
     {
         sequelize,
-        modelName: "User",
-        timestamps: true,
+        modelName: "users",
+        timestamps: false,
         paranoid: true
     }
 );

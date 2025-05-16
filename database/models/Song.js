@@ -22,7 +22,7 @@ Song.init(
             type: DataTypes.STRING(100),
             allowNull: false
         },
-        emotion: {
+        emotionid: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -33,7 +33,7 @@ Song.init(
     },
     {
         sequelize,
-        modelName: "Song",
+        modelName: "songs",
         timestamps: false
     }
 );

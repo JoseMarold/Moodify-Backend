@@ -17,7 +17,7 @@ Emotion.init(
     },
     {
         sequelize,
-        modelName: "Emotion",
+        modelName: "emotion",
         timestamps: false
     }
 );

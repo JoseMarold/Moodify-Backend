@@ -3,7 +3,7 @@ const User = require("./User");
 const Emotion = require("./Emotion");
 const Song = require("./Song");
 const Recommendation = require("./Recommendation.js");
-require("./associations");
+require("./associations.js");
 
 sequelize.sync({ force: false })
   .then(() => {

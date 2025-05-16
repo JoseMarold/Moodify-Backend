@@ -29,7 +29,7 @@ Recommendation.init(
     },
     {
         sequelize,
-        modelName: "Recommendation",
+        modelName: "recommendation",
         timestamps: false
     }
 );

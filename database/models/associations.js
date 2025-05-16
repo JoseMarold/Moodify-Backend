@@ -3,8 +3,8 @@ const Emotion = require("./Emotion");
 const Song = require("./Song");
 const Recommendation = require("./Recommendation");
 
-Emotion.hasMany(Song, { foreignKey: "emotion" });
-Song.belongsTo(Emotion, { foreignKey: "emotion" });
+Emotion.hasMany(Song, { foreignKey: "emotionid" });
+Song.belongsTo(Emotion, { foreignKey: "emotionid" });
 
 User.hasMany(Recommendation, { foreignKey: "userrec" });
 Recommendation.belongsTo(User, { foreignKey: "userrec" });

@@ -12,14 +12,16 @@ User.init(
         },
         name: {
             type: DataTypes.STRING(100),
+            unique: true,
             allowNull: false
         },
         password: {
-            type: DataTypes.STRING(15),
+            type: DataTypes.STRING(100),
             allowNull: false
         },
         email: {
-            type: DataTypes.STRING(15),
+            type: DataTypes.STRING(100),
+            unique: true,
             allowNull: false
         }
     },

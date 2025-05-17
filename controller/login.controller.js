@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { User } = require("../database/models");
 
 const JWT_SECRET = "PROGRAWEB2025";
@@ -21,7 +22,9 @@ const login = async (req, res) => {
         .json({ message: "Invalid user or password (user not found)" });
     }
 
-    if (user.password !== password) {
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
       return res
         .status(401)
         .json({ message: "Invalid user or password (wrong password)" });

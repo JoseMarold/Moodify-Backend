@@ -11,6 +11,8 @@ var signinRouter = require('./routes/signin');
 var loginRouter = require('./routes/login');
 var verifRouter = require('./routes/verification');
 var historicalRouter = require('./routes/historical');
+var rekognitionRouter = require('./routes/rekognition');
+var recommendationRouter = require('./routes/recommendation');
 
 var app = express();
 
@@ -20,7 +22,9 @@ app.set('view engine', 'jade');
 
 app.use(cors({origin: "*"}));
 app.use(logger('dev'));
-app.use(express.json());
+require('dotenv').config();
+app.use(express.json({ limit: '20mb' }));
+app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,6 +35,8 @@ app.use('/signin', signinRouter);
 app.use('/login', loginRouter);
 app.use('/verify',verifRouter);
 app.use('/historical',historicalRouter);
+app.use('/useRekognition',rekognitionRouter);
+app.use('/getRecommendations', recommendationRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

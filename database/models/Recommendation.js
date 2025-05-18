@@ -14,7 +14,7 @@ Recommendation.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Users",
+                model: "users",
                 key: "id"
             }
         },
@@ -22,14 +22,20 @@ Recommendation.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Songs",
+                model: "songs",
                 key: "id"
             }
+        },
+        created_at: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW
         }
     },
     {
         sequelize,
         modelName: "recommendation",
+        tableName: "recommendation",
         timestamps: false
     }
 );

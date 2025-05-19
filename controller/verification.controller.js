@@ -11,6 +11,8 @@ const verification = (req, res) => {
             const tokenDecoded = jwt.verify(token, "PROGRAWEB2025");
             res.status(200).json({ message: "Valid token" });
         } catch (error) {
+            console.error("Error: Invalid Token", error);
+            Sentry.captureException(error);
             res.status(500).json({ message: "Invalid token", error: error });
         }
     }

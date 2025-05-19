@@ -1,3 +1,4 @@
+const Sentry = require('@sentry/node');
 const { User } = require("../database/models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -50,6 +51,7 @@ const createUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al crear usuario:", error);
+    Sentry.captureException(error);
     res.status(500).json({ message: "Error del servidor." });
   }
 };

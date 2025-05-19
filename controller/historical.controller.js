@@ -1,3 +1,4 @@
+const Sentry = require('@sentry/node');
 const jwt = require("jsonwebtoken");
 const { Recommendation, Song, Emotion, User } = require("../database/models");
 const dotenv = require('dotenv');
@@ -44,6 +45,7 @@ const getHistoricalRecommendations = async (req, res) => {
     res.status(200).json(formatted);
   } catch (error) {
     console.error("Error retrieving historical recommendations:", error);
+    Sentry.captureException(error);
     res.status(401).json({ message: "Invalid token or server error" });
   }
 };

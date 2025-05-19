@@ -1,3 +1,4 @@
+const Sentry = require('@sentry/node');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { User } = require("../database/models");
@@ -39,6 +40,7 @@ const login = async (req, res) => {
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error("Login error:", error);
+    Sentry.captureException(error);
     res.status(500).json({ message: "Login failed", error: "Server error" });
   }
 };

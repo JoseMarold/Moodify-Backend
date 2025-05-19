@@ -1,3 +1,4 @@
+const Sentry = require('@sentry/node');
 const sequelize = require("../database/config.js");
 const { fn } = require("sequelize");
 const Emotion = require("../database/models/Emotion");
@@ -54,6 +55,7 @@ const getRecommendationsByEmotion = async (req, res) => {
     res.json(songs);
   } catch (error) {
     console.error("Error fetching recommendations:", error);
+    Sentry.captureException(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

@@ -1,3 +1,4 @@
+const Sentry = require('@sentry/node');
 // controller/rekognition.controller.js
 const {
     RekognitionClient,
@@ -37,7 +38,8 @@ const {
         res.status(400).json({ message: 'Nothing clear' });
       }
     } catch (error) {
-      console.error("Rekognition error", error);
+      console.error("Error:Rekognition error", error);
+      Sentry.captureException(error);
       res.status(500).json({ message: "Internal rekognition error", error });
     }
   };

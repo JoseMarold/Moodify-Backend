@@ -1,4 +1,7 @@
+require("./instrument.js");
+
 var createError = require('http-errors');
+const Sentry = require("@sentry/node");
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -38,20 +41,19 @@ app.use('/historical',historicalRouter);
 app.use('/useRekognition',rekognitionRouter);
 app.use('/getRecommendations', recommendationRouter);
 
+Sentry.setupExpressErrorHandler(app);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
 });
 
 module.exports = app;
